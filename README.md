@@ -8,3 +8,7 @@ The general idea here is that there are people who you follow on twitter whose t
 
 # Configuration
 You need to create a twitter API and with the four keys create a file called 'credentials.py' and store it in the folder.
+
+![my image](https://github.com/Awesth/awesth.github.io/blob/master/Screenshot%202019-01-29%20at%2018.03.51.png?raw=true)
+
+*Specifically storing the four keys in these four variables, I trust you.*
