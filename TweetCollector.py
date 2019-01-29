@@ -1,7 +1,6 @@
 
 import tweepy
 import re
-import csv
 import credentials
 
 
@@ -13,8 +12,8 @@ api = tweepy.API(auth)
 public_tweets = api.home_timeline()
 
 # Function to extract tweets 
-def getTweets(username, tweetNr): 
-    tmp=[]
+def getTweets(username, tweetNr, tweetsList): 
+    
     
     # tweets to be extracted 
     tweets = api.user_timeline(screen_name=username) 
@@ -27,11 +26,7 @@ def getTweets(username, tweetNr):
         
         # Appending tweets to the array tmp, if they have a link
         if (hasLink):
-            tmp.append(j)  
+            tweetsList.append(j)  
 
-    # Write the tweets to a csv file
-    with open('LinksList.csv', 'a') as csvFile:
-        writer = csv.writer(csvFile)
-        writer.writerow(tmp)
-        
+    
     
