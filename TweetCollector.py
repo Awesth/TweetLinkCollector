@@ -11,9 +11,9 @@ api = tweepy.API(auth)
 
 public_tweets = api.home_timeline()
 
-# Function to extract tweets 
-def getTweets(username, tweetNr, tweetsList): 
-    
+def getTweets(username, tweetTimer, tweetsList): 
+
+    #TODO: Add timer using variable tweetTimer
     
     # tweets to be extracted 
     tweets = api.user_timeline(screen_name=username) 
@@ -28,5 +28,5 @@ def getTweets(username, tweetNr, tweetsList):
         if (hasLink):
             tweetsList.append(j)  
 
-    
+    # TODO modify and return tweetTimer
     

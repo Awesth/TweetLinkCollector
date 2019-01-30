@@ -2,21 +2,19 @@
 import TweetCollector
 import CSVTreatment
 
-# CHANGE LIST TO CSV, create and maintain the list
-# Change functions to edit this csv file
-# via twitter api use this list
-# Time doesn't make sense to keep, since all will be the same
-
 theList = []
+timestamp = 0
 
 def menu():
-    print("\nHere is the list of people you're following:")
-    print(theList) # TODO: Fix so it doesn't look like a list.
-    # Remember to change nrs if you add more options.
-    selection = input("""Main menu, please select option:
+    print("\nHere is the list of people you're following:\n")
+    for person in theList[1:]:
+        print(person)
+    selection = input("""\nMain menu, please enter a number for corresponding option:
     \n 1: Add People to the list.
     \n 2: Remove People from the list.
-    \n 3: Collect Tweets.\n 4: Exit.\n >>""")
+    \n 3: Collect Tweets.
+    \n 4: Exit.
+    \n >> """)
     
     if   selection == '1':
         addPeopleToList()
@@ -33,7 +31,7 @@ def menu():
         
     
 def addPeopleToList():
-    addMe = input("\nWho would you like to add?\n")
+    addMe = input("\nWho would you like to add?\n >> ")
     # TODO: Find/make sure person is on twitter.
     theList.append(addMe)
     print("Added " + str(addMe) + " to the list\n")
@@ -42,7 +40,7 @@ def addPeopleToList():
 
 def removePeopleFromList():
     print(theList)
-    removeMe = input("\nWho would you like to remove?\n")
+    removeMe = input("\nWho would you like to remove?\n >> ")
     if removeMe in theList:
         theList.remove(removeMe)
         print("Removed " + str(removeMe) + " from the list\n")
@@ -53,15 +51,20 @@ def removePeopleFromList():
 
     
 def collectTweets():
-    nrTweets = input("How many tweets would you like to collect?\n")
+    print("Collecting tweets.")
     tweetsList = []
     for username in theList:
-        TweetCollector.getTweets(username, nrTweets, tweetsList)
+        TweetCollector.getTweets(username, timestamp, tweetsList)
         CSVTreatment.appendTweets(tweetsList)
     menu()
 
+def startup():
+    print("\n-- Tweet Link Collector --")
+    CSVTreatment.csvToDictionary(theList)
+    menu()
 
-CSVTreatment.csvToDictionary(theList)
-menu()
-# Next is doing something about time (So as to not add the same tweet),
-# specifically related to the getTweets function.
+    # Intializes when tweets were last collected
+    timestamp = theList[0]
+
+
+startup()
