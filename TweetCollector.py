@@ -11,6 +11,14 @@ api = tweepy.API(auth)
 
 public_tweets = api.home_timeline()
 
+def checkName(name):
+    try:
+        api.get_user(name)
+        return True
+    except Exception:
+         return False
+    
+
 def getTweets(username, tweetTimer, tweetsList): 
 
     #TODO: Add timer using variable tweetTimer
